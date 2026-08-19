@@ -1,3 +1,5 @@
+Copy the entire block and replace your current README.md.
+
 # AI Ops Request Triage & Routing
 
 
@@ -125,7 +127,9 @@ Blueprint
 
 The blueprint/ directory contains a sanitized Make blueprint for the workflow.
 
-Private connection information and workspace-specific configuration have been removed. Connections must be configured again when importing the blueprint into a Make environment.
+Private connection information and workspace-specific configuration have been removed.
+
+Connections must be configured again when importing the blueprint into a Make environment.
 
 Setup
 Import blueprint/make-blueprint.json into Make.
@@ -147,17 +151,16 @@ This is a portfolio demonstration of an AI-powered triage and routing workflow.
 
 Production deployments should additionally consider:
 
-authentication
-rate limiting
-retry handling
-logging
-monitoring
-provider/API failures
-data privacy
-access control
-production-specific error handling
+Authentication
+Rate limiting
+Retry handling
+Logging
+Monitoring
+Provider/API failures
+Data privacy
+Access control
+Production-specific error handling
 Project Type
-
 AI Automation
 Workflow Automation
 LLM Integration
