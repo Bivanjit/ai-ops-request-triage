@@ -1,1 +1,7 @@
 
+{
+  "request_id": "REQ-001",
+  "requester_name": "John Doe",
+  "requester_email": "john@example.com",
+  "request_text": "The company laptop is unable to connect to the internal network and I need access restored as soon as possible."
+}
