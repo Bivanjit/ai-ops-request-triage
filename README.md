@@ -1,21 +1,62 @@
-Copy the entire block and replace your current README.md.
-
 # AI Ops Request Triage & Routing
 
 
-An AI-powered operations request triage and routing workflow built with Make.
+> AI-powered operational request classification and routing built with Make.
 
 
 ## Overview
 
 
-This workflow automates the initial handling of incoming operational requests.
+This project automates the initial handling of incoming operational requests.
 
 
-Instead of manually reading every request, determining its category and urgency, and deciding where it should go, the workflow uses an LLM to classify the request and return a structured result.
+Instead of manually reviewing every request, determining its category and urgency, and deciding which team should handle it, the workflow uses an LLM to classify each request and return a structured result.
 
 
-The structured result is then validated and used to route the request to the appropriate operational path.
+The structured result is validated and then used to route the request to the appropriate operational path.
+
+
+## Problem
+
+
+Operations teams often receive requests through forms, internal systems, email, or other channels.
+
+
+Manual triage creates repetitive work:
+
+
+- Reading every incoming request
+- Identifying the request category
+- Determining urgency
+- Extracting important information
+- Deciding which team should handle it
+- Escalating uncertain requests
+
+
+This workflow automates that initial decision layer.
+
+
+## Solution
+
+
+The automation receives an operational request through a webhook and processes it through a validation, classification, and routing pipeline.
+
+
+The AI determines:
+
+
+- Category
+- Urgency
+- Confidence score
+- Human-review requirement
+- Summary
+- Sentiment
+- Extracted information
+- Recommended team
+- Recommended action
+
+
+The result is returned as structured JSON rather than unrestricted AI-generated text.
 
 
 ## Workflow
@@ -23,6 +64,10 @@ The structured result is then validated and used to route the request to the app
 
 ```text
 Incoming Request
+       ↓
+Webhook
+       ↓
+Deduplication Check
        ↓
 Input Validation
        ↓
@@ -38,33 +83,35 @@ Team / Action Routing
        ↓
 Notification
        ↓
-Human Review when Required
-What the AI Determines
-
-For each request, the AI produces:
-
-Category
-Urgency
-Confidence score
-Whether human review is required
-Summary
-Sentiment
-Extracted information
-Recommended team
-Recommended action
-
-The workflow uses structured JSON output instead of relying on free-form AI responses.
-
+Human Review When Required
 Key Features
 AI-powered request classification
+Urgency detection
+Confidence scoring
 Structured JSON output
 JSON parsing and validation
-Confidence scoring
-Urgency detection
-Human-review flagging
+Duplicate request detection
 Conditional routing
-Team-specific notifications
-Modular workflow structure
+Human-review flagging
+Team-specific routing
+Automated notifications
+Modular workflow architecture
+AI Classification
+
+For every incoming request, the AI analyzes the request and produces a structured classification.
+
+The output includes:
+
+Field	Purpose
+category	Determines the type of request
+urgency	Determines how urgently the request should be handled
+confidence_score	Indicates confidence in the classification
+requires_human_review	Flags requests requiring human intervention
+summary	Provides a concise summary of the request
+sentiment	Identifies the overall sentiment
+extracted_information	Captures relevant information from the request
+recommended_team	Determines the team that should handle it
+recommended_action	Suggests the next operational action
 Example
 Input
 {
@@ -85,21 +132,57 @@ AI Output
   "recommended_team": "IT_SUPPORT",
   "recommended_action": "Investigate the laptop's network configuration and restore internal network access."
 }
-Why Structured Output Matters
+Validation
 
-LLM responses can be unpredictable when they are returned as unrestricted text.
+The workflow does not pass unrestricted LLM output directly into downstream automation.
 
-This workflow constrains the AI response to a defined structure and parses the result before routing decisions are made.
+The AI response is parsed and validated before routing decisions are made.
 
-That makes the downstream automation more predictable and easier to maintain.
+This helps prevent malformed or unexpected model output from breaking downstream workflow logic.
+
+Deduplication
+
+Incoming requests are checked for duplicate request IDs before continuing through the workflow.
+
+This prevents the same request from being processed repeatedly when the same event is received more than once.
+
+Conditional Routing
+
+After the AI response has been parsed and validated, the workflow uses conditional routing to determine the appropriate operational path.
+
+The routing layer can use information such as:
+
+Request category
+Urgency
+Confidence
+Human-review requirement
+Recommended team
+
+This allows the same workflow to support multiple operational paths without requiring separate workflows for every request type.
 
 Human-in-the-Loop
 
 The workflow does not attempt to automate every decision blindly.
 
-Requests can be flagged for human review when the AI determines that human intervention is required.
+Requests can be flagged for human review when automated handling should not be trusted.
 
-This provides a control point for cases where automated handling should not be trusted.
+This creates a control point between AI classification and operational action.
+
+Architecture
+
+The workflow separates the system into several logical stages:
+
+Input handling
+Duplicate detection
+Input validation
+AI reasoning
+Structured data processing
+Output validation
+Conditional routing
+Notification / action
+Human escalation
+
+This modular structure makes individual components easier to modify without redesigning the entire workflow.
 
 Repository Structure
 ai-ops-request-triage/
@@ -117,12 +200,45 @@ ai-ops-request-triage/
 │   └── architecture.md
 │
 └── screenshots/
-## Demo
+    ├── 01_full_workflow_architecture.png
+    ├── 02_input_validation_and_deduplication.png
+    ├── 03_ai_triage_structured_json.png
+    ├── 04_human_review_routing.png
+    ├── 05_deduplication_data_store.png
+    ├── 06_execution_history_and_metrics.png
+    └── 07_successful_run_history.png
+Screenshots
+Workflow Architecture
 
-A public Make scenario demonstrating the workflow:
+Input Validation and Deduplication
 
-https://us2.make.com/public/shared-scenario/eK7puRBBWuD/ai-ops-request-triage-routing
-## Blueprint
+AI Triage and Structured JSON
+
+Human Review Routing
+
+Deduplication Data Store
+
+Execution History and Metrics
+
+Successful Run
+
+Technology
+Make
+Webhooks
+LLM integration
+JSON
+Conditional routing
+Data storage
+Workflow automation
+Demo
+
+View the public Make scenario
+
+Repository
+
+View the GitHub repository
+
+Blueprint
 
 The blueprint/ directory contains a sanitized Make blueprint for the workflow.
 
@@ -135,20 +251,37 @@ Import blueprint/make-blueprint.json into Make.
 Reconnect the required integrations.
 Configure the required notification channels.
 Configure the AI/API credentials.
-Test the workflow with the sample request.
-Verify the structured output and routing behavior.
-Replace the demo input with the desired production trigger.
+Test the workflow using the sample request in examples/sample-request.json.
+Verify the structured output.
+Verify the routing behavior.
+Replace the demonstration trigger with the desired production trigger.
+Example Data
+
+The examples/ directory contains fictional demonstration data:
+
+sample-request.json — example incoming request
+sample-output.json — example structured AI classification
+
+No real customer information is required to understand or test the workflow.
+
 Important
 
 This repository contains demonstration data only.
 
-No real customer information, API keys, authentication tokens, or private workspace credentials should be committed to the repository.
+Do not commit:
 
-Limitations
+API keys
+Authentication tokens
+Private webhook URLs
+Customer information
+Personal information
+Private workspace credentials
+Other secrets
+Production Considerations
 
-This is a portfolio demonstration of an AI-powered triage and routing workflow.
+This repository is a portfolio demonstration of an AI-powered triage and routing workflow.
 
-Production deployments should additionally consider:
+A production deployment should additionally consider:
 
 Authentication
 Rate limiting
@@ -159,9 +292,48 @@ Provider/API failures
 Data privacy
 Access control
 Production-specific error handling
+Secrets management
+Input sanitization
+Failure recovery
+Audit logging
+Limitations
+
+The workflow demonstrates the architecture and implementation of an AI-powered triage system.
+
+The classification quality depends on the underlying LLM, prompt design, input quality, and validation rules.
+
+Production implementations should be tested against representative real-world requests and edge cases before being used for critical operational decisions.
+
+Service Positioning
+
+This project is a portfolio demonstration of the type of AI automation systems I can build for businesses.
+
+Typical Implementation Range
+
+₹10,000–₹25,000+
+
+Actual pricing depends on:
+
+Number of workflows
+Number of integrations
+AI/API requirements
+CRM or database integration
+Notification channels
+Business logic complexity
+Testing and deployment requirements
+Ongoing maintenance requirements
+Best Suited For
+Operations teams
+Support teams
+Internal IT teams
+Service businesses
+Companies handling large volumes of incoming requests
+Businesses looking to reduce manual triage
 Project Type
 AI Automation
 Workflow Automation
 LLM Integration
 Operations Automation
 Make
+API Integration
+Intelligent Routing
