@@ -121,8 +121,7 @@ ai-ops-request-triage/
 
 A public Make scenario demonstrating the workflow:
 
-[View the public Make scenario](https://us2.make.com/public/shared-scenario/eK7puRBBWuD/ai-ops-request-triage-routing)
-
+https://us2.make.com/public/shared-scenario/eK7puRBBWuD/ai-ops-request-triage-routing
 ## Blueprint
 
 The blueprint/ directory contains a sanitized Make blueprint for the workflow.
