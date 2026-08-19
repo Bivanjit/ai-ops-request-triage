@@ -1,1 +1,12 @@
 
+{
+  "category": "IT",
+  "urgency": "HIGH",
+  "confidence_score": 0.95,
+  "requires_human_review": false,
+  "summary": "User is unable to connect a company laptop to the internal network.",
+  "sentiment": "neutral",
+  "extracted_information": "Company laptop; internal network connection issue.",
+  "recommended_team": "IT_SUPPORT",
+  "recommended_action": "Investigate the laptop's network configuration and restore internal network access."
+}
