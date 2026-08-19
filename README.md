@@ -1,17 +1,23 @@
-
 # AI Ops Request Triage & Routing
+
 
 An AI-powered operations request triage and routing workflow built with Make.
 
+
 ## Overview
+
 
 This workflow automates the initial handling of incoming operational requests.
 
+
 Instead of manually reading every request, determining its category and urgency, and deciding where it should go, the workflow uses an LLM to classify the request and return a structured result.
+
 
 The structured result is then validated and used to route the request to the appropriate operational path.
 
+
 ## Workflow
+
 
 ```text
 Incoming Request
@@ -31,7 +37,6 @@ Team / Action Routing
 Notification
        ↓
 Human Review when Required
-
 What the AI Determines
 
 For each request, the AI produces:
@@ -158,9 +163,3 @@ Workflow Automation
 LLM Integration
 Operations Automation
 Make
-
-### Then commit it.
-
-After that, **don't add anything else yet**.
-
-Next we'll tackle the part that makes the repo visually credible: **the screenshots**. We'll decide exactly which 4–5 screenshots to take from your actual Make workflow and where to put them.
