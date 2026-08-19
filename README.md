@@ -146,7 +146,7 @@ AI Output
 ```
 
 ---
-##Validation
+## Validation
 
 The workflow does not pass unrestricted LLM output directly into downstream automation.
 
@@ -154,27 +154,27 @@ The AI response is parsed and validated before routing decisions are made.
 
 This helps prevent malformed or unexpected model output from breaking downstream workflow logic.
 
-##Deduplication
+## Deduplication
 
 Incoming requests are checked for duplicate request IDs before continuing through the workflow.
 
 This prevents the same request from being processed repeatedly when the same event is received more than once.
 
-##Conditional Routing
+## Conditional Routing
 
 After the AI response has been parsed and validated, the workflow uses conditional routing to determine the appropriate operational path.
 
-##The routing layer can use information such as:
+The routing layer can use information such as:
 
-Request category
-Urgency
-Confidence
-Human-review requirement
-Recommended team
+- Request category
+- Urgency
+- Confidence
+- Human-review requirement
+- Recommended team
 
 This allows the same workflow to support multiple operational paths without requiring separate workflows for every request type.
 
-##Human-in-the-Loop
+## Human-in-the-Loop
 
 The workflow does not attempt to automate every decision blindly.
 
@@ -182,25 +182,25 @@ Requests can be flagged for human review when automated handling should not be t
 
 This creates a control point between AI classification and operational action.
 
-##Architecture
+## Architecture
 
 The workflow separates the system into several logical stages:
 
-Input handling
-Duplicate detection
-Input validation
-AI reasoning
-Structured data processing
-Output validation
-Conditional routing
-Notification / action
-Human escalation
+1. Input handling
+2. Duplicate detection
+3. Input validation
+4. AI reasoning
+5. Structured data processing
+6. Output validation
+7. Conditional routing
+8. Notification / action
+9. Human escalation
 
-##This modular structure makes individual components easier to modify without redesigning the entire workflow.
-```
+This modular structure makes individual components easier to modify without redesigning the entire workflow.
 
----
-Repository Structure
+## Repository Structure
+
+```text
 ai-ops-request-triage/
 │
 ├── README.md
@@ -223,137 +223,3 @@ ai-ops-request-triage/
     ├── 05_deduplication_data_store.png
     ├── 06_execution_history_and_metrics.png
     └── 07_successful_run_history.png
-```
-
----
-
-##Screenshots
-Workflow Architecture
-
-Input Validation and Deduplication
-
-AI Triage and Structured JSON
-
-Human Review Routing
-
-Deduplication Data Store
-
-Execution History and Metrics
-
-Successful Run
-
-Technology
-Make
-Webhooks
-LLM integration
-JSON
-Conditional routing
-Data storage
-Workflow automation
-Demo
-
-View the public Make scenario
-
-Repository
-
-View the GitHub repository
-
-Blueprint
-
-The blueprint/ directory contains a sanitized Make blueprint for the workflow.
-
-Private connection information and workspace-specific configuration have been removed.
-
-Connections must be configured again when importing the blueprint into a Make environment.
-
-##Setup
-Import blueprint/make-blueprint.json into Make.
-Reconnect the required integrations.
-Configure the required notification channels.
-Configure the AI/API credentials.
-Test the workflow using the sample request in examples/sample-request.json.
-Verify the structured output.
-Verify the routing behavior.
-Replace the demonstration trigger with the desired production trigger.
-Example Data
-
-##The examples/ directory contains fictional demonstration data:
-
-sample-request.json — example incoming request
-sample-output.json — example structured AI classification
-
-No real customer information is required to understand or test the workflow.
-
-##Important
-
-This repository contains demonstration data only.
-
-##Do not commit:
-
-API keys
-Authentication tokens
-Private webhook URLs
-Customer information
-Personal information
-Private workspace credentials
-Other secrets
-Production Considerations
-
-##This repository is a portfolio demonstration of an AI-powered triage and routing workflow.
-
-A production deployment should additionally consider:
-
-Authentication
-Rate limiting
-Retry handling
-Logging
-Monitoring
-Provider/API failures
-Data privacy
-Access control
-Production-specific error handling
-Secrets management
-Input sanitization
-Failure recovery
-Audit logging
-Limitations
-
-The workflow demonstrates the architecture and implementation of an AI-powered triage system.
-
-The classification quality depends on the underlying LLM, prompt design, input quality, and validation rules.
-
-Production implementations should be tested against representative real-world requests and edge cases before being used for critical operational decisions.
-
-##Service Positioning
-
-This project is a portfolio demonstration of the type of AI automation systems I can build for businesses.
-
-##Typical Implementation Range
-
-₹10,000–₹25,000+
-
-##Actual pricing depends on:
-
-Number of workflows
-Number of integrations
-AI/API requirements
-CRM or database integration
-Notification channels
-Business logic complexity
-Testing and deployment requirements
-Ongoing maintenance requirements
-Best Suited For
-Operations teams
-Support teams
-Internal IT teams
-Service businesses
-Companies handling large volumes of incoming requests
-Businesses looking to reduce manual triage
-Project Type
-AI Automation
-Workflow Automation
-LLM Integration
-Operations Automation
-Make
-API Integration
-Intelligent Routing
