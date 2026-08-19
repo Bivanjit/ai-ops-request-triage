@@ -84,7 +84,8 @@ Team / Action Routing
 Notification
        ↓
 Human Review When Required
-Key Features
+
+##Key Features
 AI-powered request classification
 Urgency detection
 Confidence scoring
