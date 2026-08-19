@@ -223,3 +223,146 @@ ai-ops-request-triage/
     ├── 05_deduplication_data_store.png
     ├── 06_execution_history_and_metrics.png
     └── 07_successful_run_history.png
+    ```
+```
+
+---
+## Screenshots
+
+The `screenshots/` directory contains visual documentation of the workflow:
+
+- **Workflow Architecture** — complete workflow overview
+- **Input Validation and Deduplication** — request validation and duplicate detection
+- **AI Triage and Structured JSON** — AI classification and structured output
+- **Human Review Routing** — human-in-the-loop escalation
+- **Deduplication Data Store** — duplicate request tracking
+- **Execution History and Metrics** — workflow execution monitoring
+- **Successful Run** — example successful execution
+
+## Technology
+
+- Make
+- Webhooks
+- LLM integration
+- JSON
+- Conditional routing
+- Data storage
+- Workflow automation
+
+## Demo
+
+A public Make scenario demonstrating the workflow:
+
+[View the public Make scenario](https://us2.make.com/public/shared-scenario/eK7puRBBWuD/ai-ops-request-triage-routing)
+
+## Repository
+
+[View the GitHub repository](https://github.com/Bivanjit/ai-ops-request-triage)
+
+## Blueprint
+
+The `blueprint/` directory contains a sanitized Make blueprint for the workflow.
+
+Private connection information and workspace-specific configuration have been removed.
+
+Connections must be configured again when importing the blueprint into a Make environment.
+
+## Setup
+
+1. Import `blueprint/make-blueprint.json` into Make.
+2. Reconnect the required integrations.
+3. Configure the required notification channels.
+4. Configure the AI/API credentials.
+5. Test the workflow using the sample request in `examples/sample-request.json`.
+6. Verify the structured output.
+7. Verify the routing behavior.
+8. Replace the demonstration trigger with the desired production trigger.
+
+## Example Data
+
+The `examples/` directory contains fictional demonstration data:
+
+- `sample-request.json` — example incoming request
+- `sample-output.json` — example structured AI classification
+
+No real customer information is required to understand or test the workflow.
+
+## Important
+
+This repository contains demonstration data only.
+
+### Do Not Commit
+
+- API keys
+- Authentication tokens
+- Private webhook URLs
+- Customer information
+- Personal information
+- Private workspace credentials
+- Other secrets
+
+## Production Considerations
+
+This repository is a portfolio demonstration of an AI-powered triage and routing workflow.
+
+A production deployment should additionally consider:
+
+- Authentication
+- Rate limiting
+- Retry handling
+- Logging
+- Monitoring
+- Provider/API failures
+- Data privacy
+- Access control
+- Production-specific error handling
+- Secrets management
+- Input sanitization
+- Failure recovery
+- Audit logging
+
+## Limitations
+
+The workflow demonstrates the architecture and implementation of an AI-powered triage system.
+
+The classification quality depends on the underlying LLM, prompt design, input quality, and validation rules.
+
+Production implementations should be tested against representative real-world requests and edge cases before being used for critical operational decisions.
+
+## Service Positioning
+
+This project is a portfolio demonstration of the type of AI automation systems I can build for businesses.
+
+## Typical Implementation Range
+
+**₹10,000–₹25,000+**
+
+Actual pricing depends on:
+
+- Number of workflows
+- Number of integrations
+- AI/API requirements
+- CRM or database integration
+- Notification channels
+- Business logic complexity
+- Testing and deployment requirements
+- Ongoing maintenance requirements
+
+## Best Suited For
+
+- Operations teams
+- Support teams
+- Internal IT teams
+- Service businesses
+- Companies handling large volumes of incoming requests
+- Businesses looking to reduce manual triage
+
+## Project Type
+
+- AI Automation
+- Workflow Automation
+- LLM Integration
+- Operations Automation
+- Make
+- API Integration
+- Intelligent Routing
