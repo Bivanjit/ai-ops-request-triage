@@ -84,24 +84,33 @@ Team / Action Routing
 Notification
        ↓
 Human Review When Required
+```
 
-##Key Features
-AI-powered request classification
-Urgency detection
-Confidence scoring
-Structured JSON output
-JSON parsing and validation
-Duplicate request detection
-Conditional routing
-Human-review flagging
-Team-specific routing
-Automated notifications
-Modular workflow architecture
-AI Classification
+---
+
+## Key Features
+
+- AI-powered request classification
+- Urgency detection
+- Confidence scoring
+- Structured JSON output
+- JSON parsing and validation
+- Duplicate request detection
+- Conditional routing
+- Human-review flagging
+- Team-specific routing
+- Automated notifications
+- Modular workflow architecture
+
+## AI Classification
 
 For every incoming request, the AI analyzes the request and produces a structured classification.
+For every incoming request, the AI analyzes the request and produces a structured classification.
+```
 
-The output includes:
+---
+
+##The output includes:
 
 Field	Purpose
 category	Determines the type of request
@@ -114,7 +123,8 @@ extracted_information	Captures relevant information from the request
 recommended_team	Determines the team that should handle it
 recommended_action	Suggests the next operational action
 Example
-Input
+
+##Input
 {
   "request_id": "REQ-001",
   "requester_name": "John Doe",
@@ -133,6 +143,9 @@ AI Output
   "recommended_team": "IT_SUPPORT",
   "recommended_action": "Investigate the laptop's network configuration and restore internal network access."
 }
+```
+
+---
 Validation
 
 The workflow does not pass unrestricted LLM output directly into downstream automation.
@@ -184,8 +197,10 @@ Notification / action
 Human escalation
 
 This modular structure makes individual components easier to modify without redesigning the entire workflow.
+```
 
-Repository Structure
+---
+##Repository Structure
 ai-ops-request-triage/
 │
 ├── README.md
@@ -208,7 +223,11 @@ ai-ops-request-triage/
     ├── 05_deduplication_data_store.png
     ├── 06_execution_history_and_metrics.png
     └── 07_successful_run_history.png
-Screenshots
+```
+
+---
+
+##Screenshots
 Workflow Architecture
 
 Input Validation and Deduplication
