@@ -121,7 +121,9 @@ Demo
 
 A public Make scenario demonstrating the workflow:
 
-https://us2.make.com/public/shared-scenario/eK7puRBBWuD/ai-ops-request-triage-routing
+## Demo
+
+[View the public Make scenario](https://us2.make.com/public/shared-scenario/eK7puRBBWuD/ai-ops-request-triage-routing)
 
 Blueprint
 
